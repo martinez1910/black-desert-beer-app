@@ -52,7 +52,7 @@ public class MainWindow {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Martínez\\git\\black-desert-beer-app\\BlackDessertBeerApp\\img\\logo.og.png"));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("img/logo.og.png"));
 		frame.setAlwaysOnTop(true);
 		frame.setBounds(100, 100, 195, 378);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,27 +70,27 @@ public class MainWindow {
 		pnCentre.setLayout(null);
 		
 		JLabel lblCereal = new JLabel("");
-		lblCereal.setIcon(new ImageIcon("C:\\Users\\Martínez\\git\\black-desert-beer-app\\BlackDessertBeerApp\\img\\00007005.png"));
+		lblCereal.setIcon(new ImageIcon("img/00007005.png"));
 		lblCereal.setBounds(40, 11, 44, 44);
 		pnCentre.add(lblCereal);
 		
 		JLabel lblWater = new JLabel("");
-		lblWater.setIcon(new ImageIcon("C:\\Users\\Martínez\\git\\black-desert-beer-app\\BlackDessertBeerApp\\img\\00009059.png"));
+		lblWater.setIcon(new ImageIcon("img/00009059.png"));
 		lblWater.setBounds(40, 66, 44, 44);
 		pnCentre.add(lblWater);
 		
 		JLabel lblLeaveningAgent = new JLabel("");
-		lblLeaveningAgent.setIcon(new ImageIcon("C:\\Users\\Martínez\\git\\black-desert-beer-app\\BlackDessertBeerApp\\img\\00009005.png"));
+		lblLeaveningAgent.setIcon(new ImageIcon("img/00009005.png"));
 		lblLeaveningAgent.setBounds(40, 121, 44, 44);
 		pnCentre.add(lblLeaveningAgent);
 		
 		JLabel lblSugar = new JLabel("");
-		lblSugar.setIcon(new ImageIcon("C:\\Users\\Martínez\\git\\black-desert-beer-app\\BlackDessertBeerApp\\img\\00009002.png"));
+		lblSugar.setIcon(new ImageIcon("img/00009002.png"));
 		lblSugar.setBounds(40, 176, 44, 44);
 		pnCentre.add(lblSugar);
 		
 		JLabel lblBeer = new JLabel("");
-		lblBeer.setIcon(new ImageIcon("C:\\Users\\Martínez\\git\\black-desert-beer-app\\BlackDessertBeerApp\\img\\00009213.png"));
+		lblBeer.setIcon(new ImageIcon("img/00009213.png"));
 		lblBeer.setBounds(40, 266, 44, 44);
 		pnCentre.add(lblBeer);
 		
