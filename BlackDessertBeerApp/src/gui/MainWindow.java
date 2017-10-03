@@ -10,15 +10,19 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class MainWindow {
 
 	private JFrame frame;
 	private JTextField txtCereal;
 	private JTextField txtWatter;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtLeaveningAgent;
+	private JTextField txtSugar;
+	private JTextField txtBeer;
+	
 
 	/**
 	 * Launch the application.
@@ -91,10 +95,6 @@ public class MainWindow {
 		lblBeer.setBounds(40, 266, 44, 44);
 		pnCentre.add(lblBeer);
 		
-		JLabel lblDivider = new JLabel("");
-		lblDivider.setBounds(10, 231, 46, 14);
-		pnCentre.add(lblDivider);
-		
 		JLabel lblBasicAmmountCereal = new JLabel("x5");
 		lblBasicAmmountCereal.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblBasicAmmountCereal.setBounds(10, 23, 46, 25);
@@ -121,6 +121,12 @@ public class MainWindow {
 		pnCentre.add(lblBasicAmmountBeer);
 		
 		txtCereal = new JTextField();
+		txtCereal.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				calculate();
+			}
+		});
 		txtCereal.setToolTipText("Introduce ammount of cereal you are going to process");
 		txtCereal.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtCereal.setBounds(94, 23, 86, 26);
@@ -135,33 +141,57 @@ public class MainWindow {
 		txtWatter.setBounds(94, 76, 86, 26);
 		pnCentre.add(txtWatter);
 		
-		textField = new JTextField();
-		textField.setToolTipText("Ammount of 'Leavening Agent' needed");
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textField.setEditable(false);
-		textField.setColumns(10);
-		textField.setBounds(94, 130, 86, 26);
-		pnCentre.add(textField);
+		txtLeaveningAgent = new JTextField();
+		txtLeaveningAgent.setToolTipText("Ammount of 'Leavening Agent' needed");
+		txtLeaveningAgent.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtLeaveningAgent.setEditable(false);
+		txtLeaveningAgent.setColumns(10);
+		txtLeaveningAgent.setBounds(94, 130, 86, 26);
+		pnCentre.add(txtLeaveningAgent);
 		
-		textField_1 = new JTextField();
-		textField_1.setToolTipText("Ammount of 'Sugar' needed");
-		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textField_1.setEditable(false);
-		textField_1.setColumns(10);
-		textField_1.setBounds(94, 182, 86, 26);
-		pnCentre.add(textField_1);
+		txtSugar = new JTextField();
+		txtSugar.setToolTipText("Ammount of 'Sugar' needed");
+		txtSugar.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtSugar.setEditable(false);
+		txtSugar.setColumns(10);
+		txtSugar.setBounds(94, 182, 86, 26);
+		pnCentre.add(txtSugar);
 		
-		textField_2 = new JTextField();
-		textField_2.setToolTipText("Ammount of 'Beer' created");
-		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
-		textField_2.setBounds(94, 273, 86, 26);
-		pnCentre.add(textField_2);
+		txtBeer = new JTextField();
+		txtBeer.setToolTipText("Minimum ammount of 'Beer' created");
+		txtBeer.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtBeer.setEditable(false);
+		txtBeer.setColumns(10);
+		txtBeer.setBounds(94, 273, 86, 26);
+		pnCentre.add(txtBeer);
 		
-		JLabel label = new JLabel("=");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		label.setBounds(79, 231, 44, 14);
-		pnCentre.add(label);
+		JLabel lblDivider = new JLabel("You will get:");
+		lblDivider.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		lblDivider.setBounds(10, 231, 227, 24);
+		pnCentre.add(lblDivider);
 	}
+	
+	private void calculate() {
+		//Wraps non-editable JTextFields
+		JTextField[] nonEditableTextFields = {txtWatter,txtLeaveningAgent,txtSugar,txtBeer};
+		
+		String strNumCereals = txtCereal.getText();
+		int numCereals = Integer.parseInt(strNumCereals);
+		//If not number or lower than minimum write NaN (Not a Number).
+		if(!isNumeric(strNumCereals) || numCereals < 5)
+			for(JTextField txtField : nonEditableTextFields)
+				txtField.setText("NaN");
+		else {
+			int beers = numCereals / 5;
+			nonEditableTextFields[0].setText(Integer.toString(beers*6));//Watter
+			nonEditableTextFields[1].setText(Integer.toString(beers*2));//Leavening Agent
+			nonEditableTextFields[2].setText(Integer.toString(beers*1));//Sugar
+			nonEditableTextFields[3].setText(Integer.toString(beers));//Beer
+		}
+	}
+	
+	private boolean isNumeric(String s) {  
+	    return s != null && s.matches("[-+]?\\d*\\.?\\d+");  
+	} 
+	
 }
