@@ -12,13 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 public class MainWindow {
 
 	private JFrame frame;
 	private JTextField txtCereal;
-	private JTextField txtWatter;
+	private JTextField txtWater;
 	private JTextField txtLeaveningAgent;
 	private JTextField txtSugar;
 	private JTextField txtBeer;
@@ -75,10 +74,10 @@ public class MainWindow {
 		lblCereal.setBounds(40, 11, 44, 44);
 		pnCentre.add(lblCereal);
 		
-		JLabel lblWatter = new JLabel("");
-		lblWatter.setIcon(new ImageIcon("C:\\Users\\Martínez\\git\\black-desert-beer-app\\BlackDessertBeerApp\\img\\00009059.png"));
-		lblWatter.setBounds(40, 66, 44, 44);
-		pnCentre.add(lblWatter);
+		JLabel lblWater = new JLabel("");
+		lblWater.setIcon(new ImageIcon("C:\\Users\\Martínez\\git\\black-desert-beer-app\\BlackDessertBeerApp\\img\\00009059.png"));
+		lblWater.setBounds(40, 66, 44, 44);
+		pnCentre.add(lblWater);
 		
 		JLabel lblLeaveningAgent = new JLabel("");
 		lblLeaveningAgent.setIcon(new ImageIcon("C:\\Users\\Martínez\\git\\black-desert-beer-app\\BlackDessertBeerApp\\img\\00009005.png"));
@@ -100,10 +99,10 @@ public class MainWindow {
 		lblBasicAmmountCereal.setBounds(10, 23, 46, 25);
 		pnCentre.add(lblBasicAmmountCereal);
 		
-		JLabel lblBasicAmmountWatter = new JLabel("x6");
-		lblBasicAmmountWatter.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblBasicAmmountWatter.setBounds(10, 77, 46, 25);
-		pnCentre.add(lblBasicAmmountWatter);
+		JLabel lblBasicAmmountWater = new JLabel("x6");
+		lblBasicAmmountWater.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblBasicAmmountWater.setBounds(10, 77, 46, 25);
+		pnCentre.add(lblBasicAmmountWater);
 		
 		JLabel lblBasicAmmountLeaveningAgent = new JLabel("x2");
 		lblBasicAmmountLeaveningAgent.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -133,13 +132,13 @@ public class MainWindow {
 		pnCentre.add(txtCereal);
 		txtCereal.setColumns(10);
 		
-		txtWatter = new JTextField();
-		txtWatter.setEditable(false);
-		txtWatter.setToolTipText("Ammount of 'Mineral Watter' needed");
-		txtWatter.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		txtWatter.setColumns(10);
-		txtWatter.setBounds(94, 76, 86, 26);
-		pnCentre.add(txtWatter);
+		txtWater = new JTextField();
+		txtWater.setEditable(false);
+		txtWater.setToolTipText("Ammount of 'Mineral Water' needed");
+		txtWater.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		txtWater.setColumns(10);
+		txtWater.setBounds(94, 76, 86, 26);
+		pnCentre.add(txtWater);
 		
 		txtLeaveningAgent = new JTextField();
 		txtLeaveningAgent.setToolTipText("Ammount of 'Leavening Agent' needed");
@@ -173,17 +172,25 @@ public class MainWindow {
 	
 	private void calculate() {
 		//Wraps non-editable JTextFields
-		JTextField[] nonEditableTextFields = {txtWatter,txtLeaveningAgent,txtSugar,txtBeer};
+		JTextField[] nonEditableTextFields = {txtWater,txtLeaveningAgent,txtSugar,txtBeer};
 		
 		String strNumCereals = txtCereal.getText();
-		int numCereals = Integer.parseInt(strNumCereals);
+		int numCereals;
+		
+		//This try-catch forces the program to show NaN when first key introduced is not a number.
+		try {
+			numCereals = Integer.parseInt(strNumCereals);
+		}catch(NumberFormatException e){
+			numCereals = 0;
+		}
+		
 		//If not number or lower than minimum write NaN (Not a Number).
 		if(!isNumeric(strNumCereals) || numCereals < 5)
 			for(JTextField txtField : nonEditableTextFields)
 				txtField.setText("NaN");
 		else {
 			int beers = numCereals / 5;
-			nonEditableTextFields[0].setText(Integer.toString(beers*6));//Watter
+			nonEditableTextFields[0].setText(Integer.toString(beers*6));//Water
 			nonEditableTextFields[1].setText(Integer.toString(beers*2));//Leavening Agent
 			nonEditableTextFields[2].setText(Integer.toString(beers*1));//Sugar
 			nonEditableTextFields[3].setText(Integer.toString(beers));//Beer
